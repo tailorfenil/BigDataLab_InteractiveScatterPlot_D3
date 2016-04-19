@@ -1,9 +1,18 @@
 $(document).ready(function() {
+	window.column_headings = []; 
+d3.csv("car.csv", function(data){
+                if(column_headings.length==0){
+                    column_headings = d3.keys(data[0]);
+                    for(i=1;i<column_headings.length-1;i+=1){
+                        d3.select("#sel-x").append("option").attr("value",column_headings[i]).text(column_headings[i]);
+                        d3.select("#sel-y").append("option").attr("value",column_headings[i]).text(column_headings[i]);
+                    }
+}});
 
 
     $('#update').on('click', function(){
 		
-		d3.selectAll("svg").remove();
+		
 		var val1 = Number($('#mpg-min').val());
 		var val2 = Number($('#mpg-max').val());
 // Set the dimensions of the canvas / graph
